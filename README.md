@@ -22,7 +22,7 @@ Séptimo workshop de la materia de automatización y control de procesos
 ## Montaje
 ### Simulación
 Para la simulación se usó el software TInkercad, con el cual se procedió a realizar el siguietne montaje:
--![conexión circuito](Conexion.png)
+- ![conexión circuito](Conexion.png)
 En donde se puede evidenciar la siguiente implementacion
--![simulacion](Simulacion.gif)
+- ![simulacion](Simulacion.gif)
 ### Implementación física
