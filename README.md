@@ -10,8 +10,8 @@ Séptimo workshop de la materia de automatización y control de procesos
     - [Protocolo de comunicación](#protocolo-de-comunicación)
     - [Protocolo de aplicación](#protocolo-de-aplicación)
   - [Montaje](#montaje)
-    -[Simulación](#simulación)
-    -[Implementación física](#implementación-física)
+    - [Simulación](#simulación)
+    - [Implementación física](#implementación-física)
 
 ## Sensor
 ## Sistema embebido
