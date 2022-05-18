@@ -5,6 +5,7 @@ Séptimo workshop de la materia de automatización y control de procesos
   - [Sensor](#sensor)
   - [Sistema embebido](#sistema-embebido)
     - [Hardware](#hardware)
+    - [Software](#software)
   - [Conectividad](#conectividad)
     - [Conectividad física](#conectividad-física)
     - [Protocolo de comuniación](#protocolo-de-comuniación)
@@ -25,9 +26,26 @@ Se utilizó el sensor de temperatura LM35 con una salida lineal de voltaje respe
 - Bajo auto calentamiento: 0.08°C en aire quieto
 - No lienalidad tipica de ±¼°C
 
-
+Referencia: [BME280 Datasheet](https://itbrainpower.net/downloadables/BST-BME280-DS002-1509607.pdf) 
 ## Sistema embebido
+Se utiliza dos placas Arduino UNO con las siguientes especificaciones.
 ### Hardware
+- Microcontrolador ATmega328P.
+- Tiene 14 pines de entrada o salida análogicas, de los que se pueden usar 6 como salidas PWM (Pulse Width Modulation).
+- Tiene 6 entradas análogas.
+- Un resonador ceramico de 16 MHz.
+- Un puerto para conexión USB
+- Un conector para toma de corriente.
+- Un botón de reinicio.
+- Provee pines con compatibilidad con los protocolos UART, I2C y SPI.
+- Tiene una velocidad de relog de 16MHz
+- Tiene memorias SRAM, FLASH y EEPROM de 2KB, 32KB, 1KB respectivamente.
+- Tiene unas dimensiones de 53.4 mm por 68.6 mm. 
+
+Referencia: [UNO R3](https://docs.arduino.cc/hardware/uno-rev3)  
+### Software
+- El sistema se montó utilizando el lenguaje de programación C++.
+- 
 ## Conectividad
 ### Conectividad física
 ### Protocolo de comuniación
