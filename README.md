@@ -45,14 +45,89 @@ Se utiliza dos placas Arduino UNO con las siguientes especificaciones.
 Referencia: [UNO R3](https://docs.arduino.cc/hardware/uno-rev3)  
 ### Software
 - El sistema se montó utilizando el lenguaje de programación C++.
-- 
+- Se utiliza el firmware embebido en Arduino.
 ## Conectividad
 ### Conectividad física
 ### Protocolo de comuniación
 ## Montaje
 ### Simulación
-Para la simulación se usó el software TInkercad, con el cual se procedió a realizar el siguietne montaje:
+Para la simulación se usó el software Tinkercad, con el cual se procedió a realizar el siguiente montaje:
 ![conexión circuito](Conexion.png)
 En donde se puede evidenciar la siguiente implementacion
 ![simulacion](Simulacion.gif)
+Se utiliza el siguiente código para el Arduino funcionando como controlador:
+```c++
+#include <Wire.h>
+const int ledPIN = 13;
+
+void setup()
+{
+ //by default A5 is the Serial Clock (SCL) 
+//and the serial data(SDA) is A4
+  pinMode(ledPIN , OUTPUT);
+  Wire.begin();        // join i2c bus (address optional for master)
+  Serial.begin(9600);  // start serial for output
+}
+
+void loop()
+{
+  Wire.requestFrom(2, 6);    // request 6 bytes from slave device #2
+  String txtTemp="";
+  while(Wire.available())    // slave may send less than requested
+  {
+    char tmpChar = Wire.read(); // receive a byte as character
+    txtTemp+=tmpChar;
+  }
+  float tempCelsius=txtTemp.toFloat();
+   Serial.println(txtTemp);
+  Serial.println(tempCelsius);
+  if(tempCelsius>30){
+  digitalWrite(ledPIN , HIGH);  
+  }
+  else {
+    digitalWrite(ledPIN , LOW); 
+  }
+  delay(500);
+}
+```
+y el siguiente código para el Arduino que funciona como replica: 
+```c++
+#include <Wire.h>
+int sensorPin=0;
+float tempCenti=0.0;
+
+void setup()
+{
+ //by default A5 is the Serial Clock (SCL) 
+//and the serial data(SDA) is A4
+  Serial.begin(9600);
+  Wire.begin(2);                // join i2c bus with address #2
+  Wire.onRequest(requestEvent); // register event
+}
+
+void loop()
+{
+  int reading=analogRead(sensorPin);
+  float voltagemV=reading*(5000/1024.0);
+  tempCenti=(voltagemV-500)/10;
+  delay(100);
+}
+
+// function that executes whenever data is requested by master
+// this function is registered as an event, see setup()
+void requestEvent()
+{
+  String txtTempC= String(tempCenti,2);
+  if(tempCenti<10){
+  txtTempC="00"+txtTempC;
+  }else if(tempCenti<100){
+    txtTempC="0"+txtTempC;
+  }
+  Serial.println(txtTempC);
+  /*String testLED="031.00";
+  Wire.write(testLED.c_str());*/
+   Wire.write(txtTempC.c_str());
+  // respond with message of 6 bytes as expected by master
+}
+```
 ### Implementación física
